@@ -1,0 +1,25 @@
+## Ignore Visual Studio temporary files and build outputs
+.vs/
+[Bb]in/
+[Oo]bj/
+[Pp]ackages/
+packages/
+_ReSharper*/
+*.user
+*.userosscache
+*.sln.docstates
+
+## Ignore build logs and test results
+*.log
+build.txt
+build_errors.log
+TestResults/
+
+## Ignore NuGet packages folder (will be restored by Jenkins)
+**/packages/*
+!**/packages/repositories.config
+
+## Ignore OS files
+Thumbs.db
+ehthumbs.db
+Desktop.ini

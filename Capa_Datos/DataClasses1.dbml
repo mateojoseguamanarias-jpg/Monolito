@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Monolito4to" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=Monolito4to;Integrated Security=True;Encrypt=False" SettingsObjectName="Capa_Datos.Properties.Settings" SettingsPropertyName="Monolito4toConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbl_carrito" Member="tbl_carrito">
+    <Type Name="tbl_carrito">
+      <Column Name="car_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="usu_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pro_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="car_fecha" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_producto_tbl_carrito" Member="tbl_producto" ThisKey="pro_id" OtherKey="pro_id" Type="tbl_producto" IsForeignKey="true" />
+      <Association Name="tbl_usuario_tbl_carrito" Member="tbl_usuario" ThisKey="usu_id" OtherKey="usu_id" Type="tbl_usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_categoria" Member="tbl_categoria">
+    <Type Name="tbl_categoria">
+      <Column Name="cat_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="cat_nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cat_estado" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Association Name="tbl_categoria_tbl_producto" Member="tbl_producto" ThisKey="cat_id" OtherKey="cat_id" Type="tbl_producto" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_producto" Member="tbl_producto">
+    <Type Name="tbl_producto">
+      <Column Name="pro_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="pro_nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="pro_cantidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pro_precio" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="pro_estado" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="prov_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pro_ruta_foto" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="cat_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pro_prev_prov_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_producto_tbl_carrito" Member="tbl_carrito" ThisKey="pro_id" OtherKey="pro_id" Type="tbl_carrito" />
+      <Association Name="tbl_producto_tbl_producto_fotos" Member="tbl_producto_fotos" ThisKey="pro_id" OtherKey="pro_id" Type="tbl_producto_fotos" />
+      <Association Name="tbl_categoria_tbl_producto" Member="tbl_categoria" ThisKey="cat_id" OtherKey="cat_id" Type="tbl_categoria" IsForeignKey="true" />
+      <Association Name="tbl_proveedor_tbl_producto" Member="tbl_proveedor" ThisKey="prov_id" OtherKey="prov_id" Type="tbl_proveedor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_producto_fotos" Member="tbl_producto_fotos">
+    <Type Name="tbl_producto_fotos">
+      <Column Name="pfot_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="pro_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pfot_ruta_foto" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="pfot_fecha" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_producto_tbl_producto_fotos" Member="tbl_producto" ThisKey="pro_id" OtherKey="pro_id" Type="tbl_producto" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_proveedor" Member="tbl_proveedor">
+    <Type Name="tbl_proveedor">
+      <Column Name="prov_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="prov_nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="prov_estado" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Association Name="tbl_proveedor_tbl_producto" Member="tbl_producto" ThisKey="prov_id" OtherKey="prov_id" Type="tbl_producto" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_tipo_usuario" Member="tbl_tipo_usuario">
+    <Type Name="tbl_tipo_usuario">
+      <Column Name="tusu_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tusu_nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="tusu_estado" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Association Name="tbl_tipo_usuario_tbl_usuario" Member="tbl_usuario" ThisKey="tusu_id" OtherKey="tusu_id" Type="tbl_usuario" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_usuario" Member="tbl_usuario">
+    <Type Name="tbl_usuario">
+      <Column Name="usu_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="usu_cedula" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="usu_nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_apellidos" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_direccion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="usu_celular" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="usu_correo" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_fecha_creacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="usu_fecha_cumple" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="usu_nick" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_contrasena" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="usu_intentos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="usu_codigo_OTP" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="usu_otp_hash" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="usu_google_id" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="usu_facebook_id" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="usu_fecha_Ultimo" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="usu_puntos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="usu_estado" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="tusu_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_usuario_tbl_carrito" Member="tbl_carrito" ThisKey="usu_id" OtherKey="usu_id" Type="tbl_carrito" />
+      <Association Name="tbl_usuario_tbl_usuario_fotos" Member="tbl_usuario_fotos" ThisKey="usu_id" OtherKey="usu_id" Type="tbl_usuario_fotos" />
+      <Association Name="tbl_tipo_usuario_tbl_usuario" Member="tbl_tipo_usuario" ThisKey="tusu_id" OtherKey="tusu_id" Type="tbl_tipo_usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_usuario_fotos" Member="tbl_usuario_fotos">
+    <Type Name="tbl_usuario_fotos">
+      <Column Name="foto_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="usu_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="foto_data" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="foto_fecha" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_usuario_tbl_usuario_fotos" Member="tbl_usuario" ThisKey="usu_id" OtherKey="usu_id" Type="tbl_usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.desencriptacon" Method="desencriptacon" IsComposable="true">
+    <Parameter Name="clave" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.encriptacon" Method="encriptacon" IsComposable="true">
+    <Parameter Name="clave" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Data.Linq.Binary" />
+  </Function>
+</Database>
