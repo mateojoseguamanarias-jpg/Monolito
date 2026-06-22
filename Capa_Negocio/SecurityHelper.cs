@@ -8,12 +8,12 @@ namespace Capa_Datos
 {
     public static class SecurityHelper
     {
-        private static ICryptoService crypto = new PBKDF2();
         private static readonly byte[] Key = Encoding.UTF8.GetBytes("N0v4X_S3cur1ty_P"); // 16 bytes
         private static readonly byte[] IV = Encoding.UTF8.GetBytes("7f77dd_00f2ff_S2"); // 16 bytes
 
         public static string GenerateFullHash(string otp)
         {
+            var crypto = new PBKDF2();
             string salt = crypto.GenerateSalt();
             string hash = crypto.Compute(otp, salt);
             return hash + "|" + salt;
@@ -23,6 +23,7 @@ namespace Capa_Datos
         {
             if (string.IsNullOrEmpty(storedValue) || !storedValue.Contains("|")) return false;
             string[] parts = storedValue.Split('|');
+            var crypto = new PBKDF2();
             return crypto.Compute(plainOtp, parts[1]) == parts[0];
         }
 

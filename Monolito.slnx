@@ -2,4 +2,5 @@
   <Project Path="Capa_Datos/Capa_Datos.csproj" Id="8b271b01-17bc-438f-b48f-acb66167097e" />
   <Project Path="Capa_Negocio/Capa_Negocio.csproj" Id="5beead44-6ed8-455e-ade1-326820d088a4" />
   <Project Path="Monolito/Monolito.csproj" Id="d545f233-26d8-47fc-ad99-fe6b03059d43" />
+  <Project Path="Monolito.Tests/Monolito.Tests.csproj" Id="9f3a1f82-12bc-43ff-a4ef-acb88367097f" />
 </Solution>
